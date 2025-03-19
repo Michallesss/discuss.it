@@ -10,10 +10,16 @@ type Props = {
 export default function PostPage({ params }: Props) {
   // test:
   const { postId } = params; // ! Error
-  const date = "Jan. 12, 2025"; // TODO validate date
+  const date = new Date();
   const author = "John Doe";
   const title = "Gdzie jest patio???";
   const content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, eligendi? Quos, qui! Beatae accusantium laudantium numquam qui impedit. Deserunt quasi doloremque fuga eum aspernatur! Explicabo delectus rerum nam culpa veniam.";
+
+  const formatedDate = date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
 
   return (
     <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-950 antialiased">
@@ -28,7 +34,7 @@ export default function PostPage({ params }: Props) {
                 <div>
                   <a href="#" rel="author" className="text-xl font-bold text-gray-900 dark:text-white">{author}</a>
                   {/* <p className="text-base text-gray-500 dark:text-gray-400">Graphic Designer, educator & CEO Flowbite</p> */}
-                  <p className="text-base text-gray-500 dark:text-gray-400">{date}</p>
+                  <p className="text-base text-gray-500 dark:text-gray-400">{formatedDate}</p>
                 </div>
               </div>
             </address>

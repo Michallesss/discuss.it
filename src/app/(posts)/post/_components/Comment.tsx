@@ -5,7 +5,12 @@ type Props = {
 };
 
 export default function Comment({ content, date, author }: Props) {
-  // TODO validate date
+  const formatedDate = date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+
   return (
     <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
       <footer className="flex justify-between items-center mb-2">
@@ -13,7 +18,7 @@ export default function Comment({ content, date, author }: Props) {
           <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">{/*<img
               className="mr-2 w-6 h-6 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
               alt="Michael Gough" />*/}{author}</p>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Feb. 8, 2022</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">{formatedDate}</p>
         </div>
         <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
           className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -26,7 +31,7 @@ export default function Comment({ content, date, author }: Props) {
           <span className="sr-only">Comment settings</span>
         </button>
         {/* <!-- Dropdown menu --> */}
-        <div id="dropdownComment1"
+        {/* <div id="dropdownComment1"
           className="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
           <ul className="py-1 text-sm text-gray-700 dark:text-gray-200"
             aria-labelledby="dropdownMenuIconHorizontalButton">
@@ -43,11 +48,9 @@ export default function Comment({ content, date, author }: Props) {
                 className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </footer>
-      <p>Very straight-to-point article. Really worth time reading. Thank you! But tools are just the
-        instruments for the UX designers. The knowledge of the design tools are as important as the
-        creation of the design strategy.</p>
+      <p>{content}</p>
       <div className="flex items-center mt-4 space-x-4">
         <button type="button"
           className="flex items-center font-medium text-sm text-gray-500 hover:underline dark:text-gray-400">
