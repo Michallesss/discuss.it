@@ -4,6 +4,7 @@ import Comment from "../_components/Comment";
 
 export default function PostPage() {
   const searchParams = useSearchParams();
+  const commentsCount = 2;
 
   // test:
   const postId = searchParams.get('postId');
@@ -40,7 +41,7 @@ export default function PostPage() {
           <p>{content}</p>
           <section className="not-format">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
+              <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion ({commentsCount})</h2>
             </div>
             <form className="mb-6">
               <div
@@ -55,8 +56,8 @@ export default function PostPage() {
                 Post comment
               </button>
             </form>
-            <Comment />
-            <Comment />
+            <Comment date={new Date()} content=':<<<<<<<<<<<<<' author='Grażyna2' />
+            <Comment date={new Date()} content='NIE BĘDZIE DUŚCIE SIE TAM' author='Malwina' />
           </section>
         </article>
       </div>
