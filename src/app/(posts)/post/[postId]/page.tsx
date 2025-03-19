@@ -1,4 +1,11 @@
-export default function PostPage() {
+'use client'
+type Props = {
+  params: {
+    postId: string;
+  }
+}
+
+export default function PostPage({ params }: Props) {
   return (
     <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-950 antialiased">
       <div className="flex justify-between px-4 mx-auto max-w-screen-xl ">

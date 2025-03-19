@@ -1,4 +1,5 @@
-// create new post
+'use client'
+
 export default function CreatePostPage() {
   return (
     <section className="bg-white dark:bg-gray-950">

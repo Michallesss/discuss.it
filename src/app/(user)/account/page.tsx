@@ -1,4 +1,5 @@
-// my account
+'use client'
+
 export default function MyAccoundPage() {
   return (
     <div>
