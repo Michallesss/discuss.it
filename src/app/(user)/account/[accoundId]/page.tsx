@@ -1,11 +1,10 @@
 'use client'
-type Props = {
-  params: {
-    accoundId: string;
-  }
-}
+import { useSearchParams } from 'next/navigation'
 
-export default function AccountPage({ params }: Props) {
+export default function AccountPage() {
+  const searchParams = useSearchParams();
+  const accoundId = searchParams.get('accoundId');
+
   return (
     <div>
       <h1>Account Page</h1>

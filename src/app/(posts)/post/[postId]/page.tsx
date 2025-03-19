@@ -1,15 +1,12 @@
 'use client'
+import { useSearchParams } from 'next/navigation'
 import Comment from "../_components/Comment";
 
-type Props = {
-  params: {
-    postId: string;
-  }
-}
+export default function PostPage() {
+  const searchParams = useSearchParams();
 
-export default function PostPage({ params }: Props) {
   // test:
-  const { postId } = params; // ! Error
+  const postId = searchParams.get('postId');
   const date = new Date();
   const author = "John Doe";
   const title = "Gdzie jest patio???";
