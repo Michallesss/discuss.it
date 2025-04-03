@@ -1,20 +1,42 @@
 'use client'
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+// import { DevTool } from "@hookform/devtools";
+// Components
 import Form from "../_layout/Form";
+import ErrorMessage from "../_components/ErrorMessage";
+import SubmitButton from "../_components/SubmitButton";
+// Schemas
+import type { loginType } from "@/schemas/auth.schemas";
+import { loginSchema } from "@/schemas/auth.schemas";
+// Actions
+import { loginAction } from "@/actions/auth.actions";
 
 export default function LoginPage() {
+  const { register, handleSubmit, /*control,*/ formState: { errors, isSubmitting } } = useForm<loginType>({
+    mode: "onBlur",
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    }
+  });
+
   return (
     <Form label="Login to your account">
-      <form className="space-y-4 md:space-y-6" action="#">
+      <form onSubmit={handleSubmit(loginAction)} className="space-y-4 md:space-y-6">
         <div>
           <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-          <input type="email" name="email" id="email"
+          <ErrorMessage error={errors.email} />
+          <input {...register('email')} type="mail" id="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="name@company.com" required />
         </div>
         <div>
-          <label htmlFor="password"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-          <input type="password" name="password" id="password" placeholder="••••••••"
+          <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+          <ErrorMessage error={errors.password} />
+          <input {...register('password')} type="password" id="password" placeholder="••••••••"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required />
         </div>
@@ -30,13 +52,12 @@ export default function LoginPage() {
                 Conditions</a></label>
           </div>
         </div> */}
-        <button type="submit"
-          className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Login
-          to account</button>
+        <SubmitButton loading={isSubmitting} text="Login to account" />
         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-          Already have an account? <a href="/register"
-            className="font-medium text-primary-600 hover:underline dark:text-primary-500">Register here</a>
+          Already have an account? <Link href="/register"
+            className="font-medium text-primary-600 hover:underline dark:text-primary-500">Register here</Link>
         </p>
+        {/* <DevTool control={control} /> */}
       </form>
     </Form>
   );
