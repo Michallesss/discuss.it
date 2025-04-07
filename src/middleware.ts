@@ -4,10 +4,10 @@ import type { NextRequest } from "next/server";
 import { getUserMeLoader } from "@/services/get-user-me-loader";
 
 export async function middleware(request: NextRequest) {
-  // const user = await getUserMeLoader();
+  const user = await getUserMeLoader();
 
   // Don't allow logged user to access sign page
-  // if (user.ok) return NextResponse.redirect(new URL("/", request.url));
+  if (user.ok) return NextResponse.redirect(new URL("/", request.url));
 
   return NextResponse.next();
 }
